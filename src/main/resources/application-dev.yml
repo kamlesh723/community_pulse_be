@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: communityPulse
+
+  datasource:
+    url: jdbc:postgresql://localhost:5434/community_pulse_dev
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    org:
+      springframework=DEBUG:
+
+jwt:
+  secret: bXlzZXJjdXJlc3VwZXJsb25namV3dHNlY3JldGtleQ==
+  expiration: 3600
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha

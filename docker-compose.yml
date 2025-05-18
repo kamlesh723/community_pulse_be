@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  af_postgres_db:
+    image: postgres:15
+    container_name: community_pulse_postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: community_pulse_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
