@@ -22,6 +22,11 @@ public class User {
     @Column(unique = true)
     private String username;
 
+
+    @NotBlank
+    @Column(unique = true)
+    private String phone;
+
     @NotBlank
     private String password;
 }
