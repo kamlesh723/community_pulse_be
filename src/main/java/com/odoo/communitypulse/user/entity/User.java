@@ -22,11 +22,13 @@ public class User {
     @Column(unique = true)
     private String username;
 
-
     @NotBlank
     @Column(unique = true)
     private String phone;
 
     @NotBlank
     private String password;
+
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean verified = false;
 }
