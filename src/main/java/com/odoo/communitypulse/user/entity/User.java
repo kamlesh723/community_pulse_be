@@ -24,6 +24,10 @@ public class User {
 
     @NotBlank
     @Column(unique = true)
+    private String otp;
+
+    @NotBlank
+    @Column(unique = true)
     private String phone;
 
     @NotBlank
