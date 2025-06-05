@@ -18,4 +18,10 @@ public class EmailService {
         message.setText(text);
         mailSender.send(message);
     }
+
+    public void sendOtpEmail(String to, String otp) {
+        String subject = "Your OTP Code";
+        String text = "Your OTP is: " + otp;
+        sendEmail(to, subject, text);
+    }
 }

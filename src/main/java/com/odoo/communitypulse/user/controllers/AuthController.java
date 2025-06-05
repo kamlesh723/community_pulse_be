@@ -5,6 +5,8 @@ import com.odoo.communitypulse.user.entity.User;
 import com.odoo.communitypulse.user.repository.UserRepository;
 import com.odoo.communitypulse.user.request.LoginRequest;
 import com.odoo.communitypulse.user.request.RegisterRequest;
+import com.odoo.communitypulse.user.service.EmailService;
+import com.odoo.communitypulse.user.service.OtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
@@ -29,6 +31,13 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private OtpService otpService;
+
     @PostMapping("/users/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -41,6 +50,9 @@ public class AuthController {
         user.setPhone(request.getPhone());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         userRepository.save(user);
+        String otp = otpService.generateOtp(request.getEmail());
+        System.out.println(otp);
+        emailService.sendOtpEmail(request.getEmail(), otp);
 
         return ResponseEntity.ok("User registered successfully!");
     }
@@ -57,4 +69,6 @@ public class AuthController {
         return ResponseEntity.ok().body(java.util.Map.of("token", token));
     }
 }
+
+
 
